@@ -1,14 +1,13 @@
 package ru.mirea.ivanova.nasareport.data.network
 
-import ru.mirea.ivanova.nasareport.domain.models.ApodItem
-
 class NetworkApi {
-    fun getApod(): ApodItem {
-        return ApodItem(
-            title = "Mocked Galaxy",
-            description = "This is a mocked photo from the network.",
+    // Для учебного мок-апа — синхронный. При желании можно сделать suspend и retrofit.
+    fun getApod(): ApodDto {
+        return ApodDto(
             date = "2025-10-30",
-            imageUrl = "https://example.com/mock.jpg"
+            title = "Mocked Galaxy (DTO)",
+            explanation = "This is a mocked photo from the network (DTO).",
+            url = "https://example.com/mock.jpg"
         )
     }
 }

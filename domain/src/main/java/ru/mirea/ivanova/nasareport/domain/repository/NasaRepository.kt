@@ -1,14 +1,14 @@
 package ru.mirea.ivanova.nasareport.domain.repository
 
-import ru.mirea.ivanova.nasareport.domain.models.ApodItem
+import androidx.lifecycle.LiveData
+import ru.mirea.ivanova.nasareport.domain.models.Apod
 
 interface NasaRepository {
-    suspend fun getApod(): ApodItem {
-        return ApodItem(
-            title = "Amazing Galaxy",
-            description = "A beautiful photo of a distant galaxy captured by Hubble.",
-            date = "2025-10-30",
-            imageUrl = "https://example.com/galaxy.jpg"
-        )
-    }
+    fun getApodFromDb(): LiveData<List<Apod>>
+
+    // Сеть (последний загруженный элемент)
+    fun getApodFromNetwork(): LiveData<Apod?>
+
+    // Обновить (загрузить из сети и сохранить в БД)
+    suspend fun refreshApod()
 }

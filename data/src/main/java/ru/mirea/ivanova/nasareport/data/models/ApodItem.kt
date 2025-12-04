@@ -3,7 +3,7 @@ package ru.mirea.ivanova.nasareport.data.models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "apoditem")
 data class ApodItem(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val title: String,
