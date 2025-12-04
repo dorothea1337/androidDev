@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "520306594617",
+    "project_id": "nasareport-fafbd",
+    "storage_bucket": "nasareport-fafbd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520306594617:android:3596b15ac1cc4cbf490ee8",
+        "android_client_info": {
+          "package_name": "ru.mirea.ivanova.nasareport"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpQRfdOFfLSeDrgiC6ToTdnUO8W_amr3M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
