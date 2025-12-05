@@ -1,11 +1,12 @@
 package ru.mirea.ivanova.nasareport.presentation.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ru.mirea.ivanova.nasareport.R
 import ru.mirea.ivanova.nasareport.domain.models.EpicImage
@@ -15,7 +16,6 @@ class EpicAdapter : RecyclerView.Adapter<EpicAdapter.EpicViewHolder>() {
     private val items = mutableListOf<EpicImage>()
 
     fun setItems(newItems: List<EpicImage>) {
-        // Simple replace. For better performance, use DiffUtil (example below)
         items.clear()
         items.addAll(newItems)
         notifyDataSetChanged()
@@ -37,12 +37,17 @@ class EpicAdapter : RecyclerView.Adapter<EpicAdapter.EpicViewHolder>() {
         private val imageIv: ImageView = itemView.findViewById(R.id.epicImage)
 
         fun bind(item: EpicImage) {
-            titleTv.text = item.caption
-            // Загрузка картинки: здесь можно подключить Coil/Glide/Picasso. Сейчас — placeholder.
-            // Если добавишь Coil: Coil.imageLoader / imageView.load(item.imageUrl)
-            imageIv.contentDescription = item.caption
-            // TODO: подключить загрузчик картинок и раскомментировать
-            // imageView.load(item.imageUrl)
+            val number = if (item.id.length >= 6) item.id.takeLast(6) else item.id
+            titleTv.text = "Earth Picture №${number}"
+            imageIv.contentDescription = titleTv.text
+
+            Picasso.get()
+                .load(item.imageUrl)
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.error)
+                .into(imageIv)
+
+            Log.d("EPIC", "Loading: ${item.imageUrl}")
         }
     }
 }

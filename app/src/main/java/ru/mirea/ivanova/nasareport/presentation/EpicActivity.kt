@@ -36,7 +36,6 @@ class EpicActivity : AppCompatActivity() {
             adapter.setItems(list)
         }
 
-        // загрузить mock-данные
         viewModel.refresh()
     }
 }

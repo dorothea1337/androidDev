@@ -6,5 +6,5 @@ import ru.mirea.ivanova.nasareport.domain.models.EpicImage
 interface EpicRepository {
     fun getEpicFromDb(): LiveData<List<EpicImage>>
     fun getEpicFromNetwork(): LiveData<List<EpicImage>>
-    suspend fun refreshEpic() // загрузить mock из сети и сохранить в БД
+    suspend fun refreshEpic()
 }

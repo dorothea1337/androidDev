@@ -7,7 +7,10 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import android.content.Intent
+import com.squareup.picasso.Picasso
+
 import androidx.appcompat.app.AppCompatActivity
+import ru.mirea.ivanova.nasareport.R
 import ru.mirea.ivanova.nasareport.databinding.ActivityMainBinding
 import ru.mirea.ivanova.nasareport.data.repository.NasaRepositoryImpl
 import ru.mirea.ivanova.nasareport.domain.usecases.GetApodUseCase
@@ -30,52 +33,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Тестовый блок для проверки clean architecture и MediatorLiveData
-        /*fun testMediatorLiveData() {
-            Log.d("Test", "=== START TEST MediatorLiveData ===")
-
-            // 1. Проверка подписки через ViewModel
-            viewModel.mergedData.observe(this) { list ->
-                Log.d("Test", "MergedData size: ${list.size}")
-                list.forEach { apod ->
-                    Log.d("Test", "APOD: ${apod.date} - ${apod.title}")
-                }
-            }
-
-            // 2. Проверка LiveData обновления
-            Log.d("Test", "Triggering refresh to simulate network update...")
-            viewModel.refresh()  // запускаем сетевое обновление
-
-            // 3. Проверка объединения данных (MediatorLiveData)
-            // Имитируем добавление нового элемента в БД напрямую через репозиторий
-            val repo = NasaRepositoryImpl(this)
-            lifecycleScope.launch {
-                // Создаём тестовый объект
-                val testApod = ru.mirea.ivanova.nasareport.data.network.ApodDto(
-                    date = "2025-12-05",
-                    title = "Test Galaxy",
-                    explanation = "This is a test entry for DB.",
-                    url = "https://example.com/test.jpg"
-                )
-                // Сохраняем в БД через DAO напрямую
-                repo.refreshApod()  // Это уже сохраняет сеть в БД и обновляет LiveData
-                Log.d("Test", "DB + Network should now be merged in mergedData.")
-            }
-        }*/
-
-
-        // Подписываемся на объединённые данные (MediatorLiveData)
         viewModel.mergedData.observe(this) { list ->
-            Log.d("NasaApp", "Merged APOD items: ${list.size}")
-            list.forEach { apod ->
-                Log.d("NasaApp", "${apod.date} - ${apod.title}")
+            if (list.isNotEmpty()) {
+                val apod = list[0]
+                Picasso.get()
+                    .load(apod.imageUrl)
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.error)
+                    .into(binding.apodImage)
             }
         }
 
-        // Запускаем обновление из сети
-        viewModel.refresh()
 
-        //testMediatorLiveData()
+        viewModel.refresh()
 
         binding.btnEpic.setOnClickListener {
             val intent = Intent(this, EpicActivity::class.java)

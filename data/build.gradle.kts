@@ -32,7 +32,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -46,8 +45,16 @@ dependencies {
 
     implementation(libs.com.google.firebase.firebase.auth.ktx)
     implementation(platform("com.google.firebase:firebase-bom:34.5.0"))
-    implementation(libs.androidx.room.runtime.v261)
-    implementation(libs.androidx.room.ktx.v261)
-    kapt("androidx.room:room-compiler:2.6.1")
+
+    // Room
+    implementation("androidx.room:room-runtime:2.7.1")
+    implementation("androidx.room:room-ktx:2.7.1")
+    kapt("androidx.room:room-compiler:2.7.1")
+
+
     implementation("com.google.code.gson:gson:2.10.1")
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 }

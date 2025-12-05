@@ -42,7 +42,5 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(libs.androidx.room.runtime.v261)
-    implementation(libs.androidx.room.ktx.v261)
     kapt("androidx.room:room-compiler:2.6.1")
 }

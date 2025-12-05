@@ -40,22 +40,18 @@ class NasaRepositoryImpl(context: Context) : NasaRepository {
     private val networkLiveData = MutableLiveData<Apod?>()
     override fun getApodFromNetwork(): LiveData<Apod?> = networkLiveData
 
-    // Загрузка из сети -> сохранение в БД -> обновление networkLiveData
     override suspend fun refreshApod() {
         withContext(Dispatchers.IO) {
-            // получить DTO
-            val dto = api.getApod()
-
-            // сохранить в SharedPrefs для примера
-            prefs.saveUserEmail("test@example.com")
-
-            // маппинг DTO -> Entity -> вставка
-            val entity = ApodMapper.dtoToEntity(dto)
-            dao.insert(entity)
-
-            // маппим DTO -> Domain и постим в LiveData
-            val domain = ApodMapper.dtoToDomain(dto)
-            networkLiveData.postValue(domain)
+            try {
+                val dto = api.getApod() // реальный сетевой вызов
+                val entity = ApodMapper.dtoToEntity(dto)
+                dao.insert(entity)
+                val domain = ApodMapper.dtoToDomain(dto)
+                networkLiveData.postValue(domain)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                networkLiveData.postValue(null) // сеть упала
+            }
         }
     }
 }

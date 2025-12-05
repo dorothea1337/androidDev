@@ -1,36 +1,32 @@
 package ru.mirea.ivanova.nasareport.data.mappers
 
 import com.google.gson.Gson
+import android.util.Log
 import ru.mirea.ivanova.nasareport.data.models.EpicEntity
 import ru.mirea.ivanova.nasareport.data.network.EpicDto
 import ru.mirea.ivanova.nasareport.domain.models.EpicImage
-
 object EpicMapper {
 
     private val gson = Gson()
 
+    fun buildEpicImageUrl(dto: EpicDto): String {
+        val datePath = dto.date.substring(0, 10).replace("-", "/")
+        val url = "https://epic.gsfc.nasa.gov/archive/natural/$datePath/png/${dto.image}.png"
+        Log.d("EPIC_URL", "image=${dto.image} | url=$url")
+        return url
+    }
+
     fun dtoToEntity(dto: EpicDto): EpicEntity {
-        // stringify maps to simple JSON for storage
-        val centroidStr = dto.centroid_coordinates?.let { gson.toJson(it) }
-        val dscovrStr = dto.dscovr_j2000_position?.let { gson.toJson(it) }
-        val lunarStr = dto.lunar_j2000_position?.let { gson.toJson(it) }
-        val sunStr = dto.sun_j2000_position?.let { gson.toJson(it) }
-        val attitudeStr = dto.attitude_quaternions?.let { gson.toJson(it) }
-
-        // For mock we can directly create image URL from image field or use full URL
-        val imageUrl = if (dto.image.startsWith("http")) dto.image
-        else "https://epic.gsfc.nasa.gov/archive/natural/${dto.date.replace("-", "/")}/png/${dto.image}.png"
-
         return EpicEntity(
             id = dto.identifier,
             date = dto.date,
             caption = dto.caption,
-            centroidCoordinates = centroidStr,
-            dscovrJ2000Position = dscovrStr,
-            lunarJ2000Position = lunarStr,
-            sunJ2000Position = sunStr,
-            attitudeQuaternions = attitudeStr,
-            imageUrl = imageUrl
+            centroidCoordinates = dto.centroid_coordinates?.let { gson.toJson(it) },
+            dscovrJ2000Position = dto.dscovr_j2000_position?.let { gson.toJson(it) },
+            lunarJ2000Position = dto.lunar_j2000_position?.let { gson.toJson(it) },
+            sunJ2000Position = dto.sun_j2000_position?.let { gson.toJson(it) },
+            attitudeQuaternions = dto.attitude_quaternions?.let { gson.toJson(it) },
+            imageUrl = buildEpicImageUrl(dto)
         )
     }
 
@@ -48,5 +44,8 @@ object EpicMapper {
         )
     }
 
-    fun dtoToDomain(dto: EpicDto): EpicImage = entityToDomain(dtoToEntity(dto))
+    fun dtoToDomain(dto: EpicDto): EpicImage {
+        return entityToDomain(dtoToEntity(dto))
+    }
 }
+

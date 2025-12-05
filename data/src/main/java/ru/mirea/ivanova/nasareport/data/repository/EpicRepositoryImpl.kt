@@ -13,20 +13,23 @@ import ru.mirea.ivanova.nasareport.data.storage.AppDatabase
 import ru.mirea.ivanova.nasareport.data.storage.SharedPrefsHelper
 import ru.mirea.ivanova.nasareport.domain.models.EpicImage
 import ru.mirea.ivanova.nasareport.domain.repository.EpicRepository
+import ru.mirea.ivanova.nasareport.data.network.EpicDto
 
 class EpicRepositoryImpl(context: Context) : EpicRepository {
+
     private val prefs = SharedPrefsHelper(context)
     private val db = Room.databaseBuilder(
         context.applicationContext,
         AppDatabase::class.java,
         "nasa.db"
     ).build()
+
     private val dao = db.epicDao()
     private val api = NetworkApi()
 
     override fun getEpicFromDb(): LiveData<List<EpicImage>> {
-        val entitiesLive = dao.getAllLive()
-        return entitiesLive.map { list ->
+        val entities = dao.getAllLive()
+        return entities.map { list ->
             list.map { EpicMapper.entityToDomain(it) }
         }
     }
@@ -36,16 +39,38 @@ class EpicRepositoryImpl(context: Context) : EpicRepository {
 
     override suspend fun refreshEpic() {
         withContext(Dispatchers.IO) {
-            // get mock list from network API
-            val dtos = api.getEpicList()
-            val entities = dtos.map { EpicMapper.dtoToEntity(it) }
-            dao.insertAll(entities)
+            try {
 
-            val domainList = dtos.map { EpicMapper.dtoToDomain(it) }
-            networkLiveData.postValue(domainList)
+                // ✔️ MOCK DTO LIST
+                val dtos = EpicMockDataSource.urls.mapIndexed { index, url ->
 
-            // optionally store something in prefs
-            prefs.saveUserEmail("epic@example.com")
+                    // Вырезаем имя файла из URL
+                    val fileName = url.substringAfterLast("/").removeSuffix(".png")
+
+                    EpicDto(
+                        identifier = index.toString(),
+                        date = "2025-05-19 00:00:00",
+                        caption = "Mock EPIC image",
+                        centroid_coordinates = null,
+                        dscovr_j2000_position = null,
+                        lunar_j2000_position = null,
+                        sun_j2000_position = null,
+                        attitude_quaternions = null,
+                        image = fileName
+                    )
+                }
+
+                val entities = dtos.map { EpicMapper.dtoToEntity(it) }
+                dao.insertAll(entities)
+
+                val domainList = dtos.map { EpicMapper.dtoToDomain(it) }
+                networkLiveData.postValue(domainList)
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                networkLiveData.postValue(emptyList())
+            }
         }
     }
+
 }

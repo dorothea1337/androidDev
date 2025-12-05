@@ -59,6 +59,6 @@ dependencies {
 
     implementation(libs.com.google.firebase.firebase.auth.ktx)
     implementation(platform("com.google.firebase:firebase-bom:34.5.0"))
-    implementation(libs.androidx.room.runtime.v261)
-    implementation(libs.androidx.room.ktx.v261)
+
+    implementation(libs.picasso)
 }
