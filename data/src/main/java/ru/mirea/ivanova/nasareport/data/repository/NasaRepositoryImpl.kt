@@ -21,7 +21,9 @@ class NasaRepositoryImpl(context: Context) : NasaRepository {
         context.applicationContext,
         AppDatabase::class.java,
         "nasa.db"
-    ).build()
+    )
+        .fallbackToDestructiveMigration()
+        .build()
 
     private val dao = db.apodDao()
     private val api = NetworkApi()

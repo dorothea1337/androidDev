@@ -2,9 +2,11 @@ package ru.mirea.ivanova.nasareport.presentation
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import ru.mirea.ivanova.nasareport.databinding.ActivityMainBinding
 import ru.mirea.ivanova.nasareport.data.repository.NasaRepositoryImpl
@@ -74,5 +76,10 @@ class MainActivity : AppCompatActivity() {
         viewModel.refresh()
 
         //testMediatorLiveData()
+
+        binding.btnEpic.setOnClickListener {
+            val intent = Intent(this, EpicActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
