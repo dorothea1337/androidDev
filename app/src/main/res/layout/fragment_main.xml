@@ -20,7 +20,7 @@
         android:textSize="30dp"
         android:fontFamily="@font/ibm_plex_mono_medium"
 
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="50dp"/>
 
     <View
         android:id="@+id/h1DecorLine"
@@ -72,16 +72,53 @@
         android:fontFamily="@font/ibm_plex_mono_regulat"
         android:textSize="20dp"
 
+        android:gravity="start|center_vertical"
+        android:padding="0dp"
+
         android:layout_marginTop="20dp"
-        android:text="earth pictures"/>
+        android:text="see earth pictures ->"
+        />
+
+    <View
+        android:id="@+id/asteroidImageDecorLine"
+
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white"
+
+        app:layout_constraintTop_toBottomOf="@id/btnEpic"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/asteroidHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/asteroidImageDecorLine"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/white"
+
+        android:text="asteroids today"
+
+        android:fontFamily="@font/ibm_plex_mono_medium"
+        android:textSize="20dp"
+
+        android:layout_marginTop="20dp"
+        />
 
     <TextView
         android:id="@+id/asteroid1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/btnEpic"
+        app:layout_constraintTop_toBottomOf="@id/asteroidHeading"
         app:layout_constraintLeft_toLeftOf="parent"
         android:textColor="@color/white"
+
+        android:fontFamily="@font/ibm_plex_mono_regulat"
+        android:textSize="20dp"
+
+        android:layout_marginTop="40dp"
         />
 
     <TextView
@@ -90,7 +127,12 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/asteroid1"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+
+        android:fontFamily="@font/ibm_plex_mono_medium"
+        android:textSize="20dp"
+
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/asteroid3"
@@ -98,15 +140,26 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/asteroid2"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+
+        android:fontFamily="@font/ibm_plex_mono_medium"
+        android:textSize="20dp"
+
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:id="@+id/btnAsteroids"
-        android:text="learn more"
+        android:text="learn more ->"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/asteroid3"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+
+        android:background="@android:color/transparent"
+        android:gravity="start|center_vertical"
+        android:padding="0dp"
+        android:textSize="20dp"
+        android:fontFamily="@font/ibm_plex_mono_regulat"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
