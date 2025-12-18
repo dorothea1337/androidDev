@@ -1,133 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.MainActivity"
-    android:background="@color/black"
-    android:paddingHorizontal="30dp">
+    android:background="@color/black">
 
-    <TextView
-        android:id="@+id/h1"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="daily NASA report"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/white"
-        android:textSize="30dp"
-        android:fontFamily="@font/ibm_plex_mono_medium"
-
-        android:layout_marginTop="20dp"/>
-
-    <View
-        android:id="@+id/h1DecorLine"
-
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/white"
-
-        app:layout_constraintTop_toBottomOf="@id/h1"
-        app:layout_constraintLeft_toLeftOf="parent"
-
-        android:layout_marginTop="20dp"/>
-
-    <ImageView
-        android:id="@+id/apodImage"
-        android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintTop_toBottomOf="@id/h1DecorLine"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
-
-        />
-
-    <View
-        android:id="@+id/apodImageDecorLine"
-
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/white"
-
-        app:layout_constraintTop_toBottomOf="@id/apodImage"
-        app:layout_constraintLeft_toLeftOf="parent"
-
-        android:layout_marginTop="20dp"/>
-
-
-    <Button
-        android:id="@+id/btnEpic"
-
-        app:layout_constraintTop_toBottomOf="@id/apodImageDecorLine"
-        app:layout_constraintLeft_toLeftOf="parent"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:background="@android:color/transparent"
-        android:fontFamily="@font/ibm_plex_mono_regulat"
-        android:textSize="20dp"
-
-        android:layout_marginTop="20dp"
-        android:text="earth pictures"/>
-
-    <TextView
-        android:id="@+id/asteroid1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/btnEpic"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="@color/white"
-        />
-
-    <TextView
-        android:id="@+id/asteroid2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/asteroid1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="@color/white"/>
-
-    <TextView
-        android:id="@+id/asteroid3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/asteroid2"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="@color/white"/>
-
-    <Button
-        android:id="@+id/btnAsteroids"
-        android:text="learn more"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/asteroid3"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="@color/white"/>
-
-    <Button
-        android:id="@+id/btnProfile"
-        android:text="profile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/btnAsteroids"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="@color/white"/>
-
-    <FrameLayout
-        android:id="@+id/fragmentContainer"
+    <!-- Контейнер Navigation Component -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:menu="@menu/bottom_menu"
+        android:background="@color/black"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

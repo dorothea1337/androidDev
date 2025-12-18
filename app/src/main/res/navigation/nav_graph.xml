@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="ru.mirea.ivanova.nasareport.presentation.MainFragment"
+        android:label="NASA report">
+
+        <action
+            android:id="@+id/action_mainFragment_to_epicListFragment"
+            app:destination="@id/epicListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/epicListFragment"
+        android:name="ru.mirea.ivanova.nasareport.presentation.EpicListFragment"
+        android:label="EPIC" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="ru.mirea.ivanova.nasareport.presentation.ProfileFragment"
+        android:label="My profile" />
+
+</navigation>
