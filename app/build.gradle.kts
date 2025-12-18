@@ -61,4 +61,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:34.5.0"))
 
     implementation(libs.picasso)
+
+    implementation("androidx.fragment:fragment-ktx:1.6.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
 }

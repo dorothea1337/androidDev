@@ -19,9 +19,6 @@
             android:name=".presentation.AsteroidsActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.EpicActivity"
-            android:exported="true" />
-        <activity
             android:name=".presentation.LoginActivity"
             android:exported="true">
             <intent-filter>

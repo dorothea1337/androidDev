@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/epicImage"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
             android:scaleType="centerCrop"
             android:contentDescription="@string/epic_image" />
 

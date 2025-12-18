@@ -57,8 +57,10 @@ class MainActivity : AppCompatActivity() {
         viewModel.refresh()
 
         binding.btnEpic.setOnClickListener {
-            val intent = Intent(this, EpicActivity::class.java)
-            startActivity(intent)
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, EpicListFragment())
+                .addToBackStack(null)
+                .commit()
         }
 
         asteroidViewModel.top3Asteroids.observe(this) { list ->
@@ -70,6 +72,13 @@ class MainActivity : AppCompatActivity() {
         binding.btnAsteroids.setOnClickListener {
             val intent = Intent(this, AsteroidsActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.btnProfile.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, ProfileFragment())
+                .addToBackStack(null)
+                .commit()
         }
     }
 }
