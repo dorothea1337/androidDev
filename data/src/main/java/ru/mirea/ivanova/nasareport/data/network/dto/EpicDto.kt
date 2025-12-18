@@ -1,4 +1,4 @@
-package ru.mirea.ivanova.nasareport.data.network
+package ru.mirea.ivanova.nasareport.data.network.dto
 
 data class EpicDto(
     val identifier: String,

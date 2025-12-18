@@ -3,20 +3,20 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardCornerRadius="8dp"
     android:layout_margin="8dp"
     card_view:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="12dp">
+        android:layout_height="450dp"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:background="@color/black">
 
         <ImageView
             android:id="@+id/epicImage"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
             android:scaleType="centerCrop"
             android:contentDescription="@string/epic_image" />
 
@@ -26,8 +26,20 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_weight="1"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:fontFamily="@font/ibm_plex_mono_regulat"
+            android:textSize="16dp"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/getMoreButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:textColor="@color/white"
+            android:text="learn more"
+            android:textSize="24dp"
+            android:fontFamily="@font/ibm_plex_mono_regulat"
+            />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

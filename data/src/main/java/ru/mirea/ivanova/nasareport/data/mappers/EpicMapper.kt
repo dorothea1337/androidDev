@@ -3,7 +3,7 @@ package ru.mirea.ivanova.nasareport.data.mappers
 import com.google.gson.Gson
 import android.util.Log
 import ru.mirea.ivanova.nasareport.data.models.EpicEntity
-import ru.mirea.ivanova.nasareport.data.network.EpicDto
+import ru.mirea.ivanova.nasareport.data.network.dto.EpicDto
 import ru.mirea.ivanova.nasareport.domain.models.EpicImage
 object EpicMapper {
 

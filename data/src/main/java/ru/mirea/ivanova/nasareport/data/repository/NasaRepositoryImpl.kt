@@ -13,6 +13,10 @@ import ru.mirea.ivanova.nasareport.data.storage.AppDatabase
 import ru.mirea.ivanova.nasareport.data.storage.SharedPrefsHelper
 import ru.mirea.ivanova.nasareport.domain.models.Apod
 import ru.mirea.ivanova.nasareport.domain.repository.NasaRepository
+import ru.mirea.ivanova.nasareport.domain.models.Asteroid
+import java.text.SimpleDateFormat
+import java.util.*
+import ru.mirea.ivanova.nasareport.data.mappers.AsteroidMapper
 
 class NasaRepositoryImpl(context: Context) : NasaRepository {
     private val prefs = SharedPrefsHelper(context)
@@ -54,4 +58,35 @@ class NasaRepositoryImpl(context: Context) : NasaRepository {
             }
         }
     }
+
+    private val asteroidsLiveData = MutableLiveData<List<Asteroid>>()
+
+    override fun getAsteroids(): LiveData<List<Asteroid>> = asteroidsLiveData
+
+    override suspend fun refreshAsteroids() {
+        withContext(Dispatchers.IO) {
+            try {
+                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+                val calendar = Calendar.getInstance()
+                val today = calendar.time
+
+                calendar.add(Calendar.DAY_OF_MONTH, -1)
+                val yesterday = calendar.time
+
+                val startDate = sdf.format(yesterday)
+                val endDate = sdf.format(today)
+
+                val response = api.getAsteroids(startDate, endDate)
+                val list = AsteroidMapper.mapNeoWsResponse(response)
+
+                asteroidsLiveData.postValue(list)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                asteroidsLiveData.postValue(emptyList())
+            }
+        }
+    }
+
+
 }

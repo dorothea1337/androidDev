@@ -14,8 +14,11 @@ import ru.mirea.ivanova.nasareport.R
 import ru.mirea.ivanova.nasareport.databinding.ActivityMainBinding
 import ru.mirea.ivanova.nasareport.data.repository.NasaRepositoryImpl
 import ru.mirea.ivanova.nasareport.domain.usecases.GetApodUseCase
+import ru.mirea.ivanova.nasareport.domain.usecases.GetAsteroidsUseCase
 import ru.mirea.ivanova.nasareport.presentation.viewmodel.ApodViewModel
 import ru.mirea.ivanova.nasareport.presentation.viewmodel.ApodViewModelFactory
+import ru.mirea.ivanova.nasareport.presentation.viewmodel.AsteroidPreviewViewModel
+import ru.mirea.ivanova.nasareport.presentation.viewmodel.AsteroidPreviewViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,6 +28,12 @@ class MainActivity : AppCompatActivity() {
         val repo = NasaRepositoryImpl(this)
         val useCase = GetApodUseCase(repo)
         ApodViewModelFactory(useCase)
+    }
+
+    private val asteroidViewModel: AsteroidPreviewViewModel by viewModels {
+        val repo = NasaRepositoryImpl(this)
+        val useCase = GetAsteroidsUseCase(repo)
+        AsteroidPreviewViewModelFactory(useCase)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +58,17 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnEpic.setOnClickListener {
             val intent = Intent(this, EpicActivity::class.java)
+            startActivity(intent)
+        }
+
+        asteroidViewModel.top3Asteroids.observe(this) { list ->
+            binding.asteroid1.text = list.getOrNull(0)?.name ?: "-"
+            binding.asteroid2.text = list.getOrNull(1)?.name ?: "-"
+            binding.asteroid3.text = list.getOrNull(2)?.name ?: "-"
+        }
+
+        binding.btnAsteroids.setOnClickListener {
+            val intent = Intent(this, AsteroidsActivity::class.java)
             startActivity(intent)
         }
     }

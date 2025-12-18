@@ -13,7 +13,7 @@ import ru.mirea.ivanova.nasareport.data.storage.AppDatabase
 import ru.mirea.ivanova.nasareport.data.storage.SharedPrefsHelper
 import ru.mirea.ivanova.nasareport.domain.models.EpicImage
 import ru.mirea.ivanova.nasareport.domain.repository.EpicRepository
-import ru.mirea.ivanova.nasareport.data.network.EpicDto
+import ru.mirea.ivanova.nasareport.data.network.dto.EpicDto
 
 class EpicRepositoryImpl(context: Context) : EpicRepository {
 

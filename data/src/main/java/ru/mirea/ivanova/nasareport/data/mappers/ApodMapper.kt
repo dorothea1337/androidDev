@@ -1,7 +1,7 @@
 package ru.mirea.ivanova.nasareport.data.mappers
 
 import ru.mirea.ivanova.nasareport.data.models.ApodItem
-import ru.mirea.ivanova.nasareport.data.network.ApodDto
+import ru.mirea.ivanova.nasareport.data.network.dto.ApodDto
 import ru.mirea.ivanova.nasareport.domain.models.Apod
 
 object ApodMapper {
