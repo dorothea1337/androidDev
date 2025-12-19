@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
 
-        android:text="<- back"
+        android:text="back"
         android:background="@android:color/transparent"
         android:gravity="start|center_vertical"
 
@@ -22,7 +22,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:padding="0dp"
 
-        android:fontFamily="@font/ibm_plex_mono_medium"/>
+        android:fontFamily="@font/ibm_plex_mono_medium"
+
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/tvTitle"
@@ -54,14 +56,14 @@
         android:id="@+id/tvText1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="some asteroids are approaching our planet. don’t worry: they travel across the Space all the time and most of them aren’t dangerous."
+        android:text="some asteroids are approaching our planet. don’t worry: they travel across the Space all the time and most of them aren’t dangerous. see the info about them."
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/astDecorLine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
         android:fontFamily="@font/ibm_plex_mono_regulat"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:layout_marginTop="20dp"
 
         />
@@ -70,31 +72,105 @@
         android:id="@+id/tvText2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="see the info about them."
+        android:text="and no, we’re not gonna end up like dinosaurs."
+
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/tvText1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
         android:fontFamily="@font/ibm_plex_mono_regulat"
-        android:textSize="18sp"
-        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        android:layout_marginTop="15dp"
+
         />
 
-    <TextView
-        android:id="@+id/tvText3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="and no, we’re not gonna end up like dinosaurs."
+    <View
+        android:id="@+id/ast1DecorLine"
 
-        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white"
+
         app:layout_constraintTop_toBottomOf="@id/tvText2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
 
-        android:fontFamily="@font/ibm_plex_mono_regulat"
-        android:textSize="18sp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tableHeader"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ast1DecorLine"
+
+        >
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:text="name"
+            android:fontFamily="@font/ibm_plex_mono_medium"/>
+
+        <TextView
+            android:id="@+id/tvDiameter"
+            android:layout_weight="1.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:text="diameter"
+            android:fontFamily="@font/ibm_plex_mono_regulat"/>
+
+        <TextView
+            android:id="@+id/tvDanger"
+            android:layout_weight="1.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:text="danger"
+            android:fontFamily="@font/ibm_plex_mono_regulat"/>
+
+        <TextView
+            android:id="@+id/tvDistance"
+            android:layout_weight="1.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:text="distance"
+            android:fontFamily="@font/ibm_plex_mono_regulat"/>
+
+        <TextView
+            android:id="@+id/tvSpeed"
+            android:layout_weight="1.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:text="speed"
+            android:fontFamily="@font/ibm_plex_mono_regulat"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/ast2DecorLine"
+
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white"
+
+        app:layout_constraintTop_toBottomOf="@id/tableHeader"
+        app:layout_constraintLeft_toLeftOf="parent"
 
         />
 
@@ -102,7 +178,7 @@
         android:id="@+id/rvAsteroids"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/tvText3"
+        app:layout_constraintTop_toBottomOf="@id/ast2DecorLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

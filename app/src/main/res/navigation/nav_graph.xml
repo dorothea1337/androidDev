@@ -18,7 +18,17 @@
     <fragment
         android:id="@+id/epicListFragment"
         android:name="ru.mirea.ivanova.nasareport.presentation.EpicListFragment"
-        android:label="EPIC" />
+        android:label="EPIC">
+
+        <action
+            android:id="@+id/action_epicListFragment_to_epicDetailsFragment"
+            app:destination="@id/epicDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/epicDetailsFragment"
+        android:name="ru.mirea.ivanova.nasareport.presentation.EpicDetailsFragment"
+        android:label="EPIC Details" />
 
     <fragment
         android:id="@+id/profileFragment"

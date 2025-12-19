@@ -18,7 +18,9 @@
         android:fontFamily="@font/ibm_plex_mono_medium"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:layout_marginTop="40dp"/>
 
     <TextView
         android:id="@+id/tvProfileEmail"
@@ -38,11 +40,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Log out"
-        android:background="@android:color/holo_red_light"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/tvProfileEmail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"/>
+        android:layout_marginTop="32dp"
+
+        android:background="@android:color/transparent"
+        android:textSize="24dp"
+        android:fontFamily="@font/ibm_plex_mono_regulat"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

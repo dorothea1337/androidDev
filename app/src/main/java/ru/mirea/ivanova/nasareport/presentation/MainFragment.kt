@@ -53,7 +53,7 @@ class MainFragment : Fragment() {
                 Picasso.get()
                     .load(list[0].imageUrl)
                     .placeholder(R.drawable.placeholder)
-                    .error(R.drawable.error)
+                    .error(R.drawable.error_background)
                     .into(binding.apodImage)
             }
         }

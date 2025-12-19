@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.mirea.ivanova.nasareport.R
 import ru.mirea.ivanova.nasareport.domain.models.EpicImage
 
-class EpicAdapter : RecyclerView.Adapter<EpicAdapter.EpicViewHolder>() {
+class EpicAdapter(
+    private val onItemClick: (EpicImage) -> Unit
+) : RecyclerView.Adapter<EpicAdapter.EpicViewHolder>() {
 
     private val items = mutableListOf<EpicImage>()
 
@@ -22,12 +24,13 @@ class EpicAdapter : RecyclerView.Adapter<EpicAdapter.EpicViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpicViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.epic_list_item, parent, false)
-        return EpicViewHolder(v)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.epic_list_item, parent, false)
+        return EpicViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: EpicViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items[position], onItemClick)
     }
 
     override fun getItemCount(): Int = items.size
@@ -36,16 +39,18 @@ class EpicAdapter : RecyclerView.Adapter<EpicAdapter.EpicViewHolder>() {
         private val titleTv: TextView = itemView.findViewById(R.id.epicTitle)
         private val imageIv: ImageView = itemView.findViewById(R.id.epicImage)
 
-        fun bind(item: EpicImage) {
+        fun bind(item: EpicImage, onItemClick: (EpicImage) -> Unit) {
             val number = if (item.id.length >= 6) item.id.takeLast(6) else item.id
-            titleTv.text = "Earth Picture №${number}"
+            titleTv.text = "Earth Picture №$number"
             imageIv.contentDescription = titleTv.text
 
             Picasso.get()
                 .load(item.imageUrl)
                 .placeholder(R.drawable.placeholder)
-                .error(R.drawable.error)
+                .error(R.drawable.error_background)
                 .into(imageIv)
+
+            itemView.setOnClickListener { onItemClick(item) }
 
             Log.d("EPIC", "Loading: ${item.imageUrl}")
         }

@@ -1,5 +1,9 @@
 package ru.mirea.ivanova.nasareport.domain.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class EpicImage(
     val id: String, // уникальное имя изображения (name from API)
     val date: String,
@@ -10,4 +14,4 @@ data class EpicImage(
     val sunJ2000Position: String?,
     val attitudeQuaternions: String?,
     val imageUrl: String // ссылка на картинку (сформируем по правилам API или укажем тестовую)
-)
+) : Parcelable

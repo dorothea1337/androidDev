@@ -40,24 +40,18 @@ class EpicRepositoryImpl(context: Context) : EpicRepository {
     override suspend fun refreshEpic() {
         withContext(Dispatchers.IO) {
             try {
+                // Получаем реальные данные с API
+                val apiData: List<EpicDto> = api.getEpicFixedDate()
 
-                // ✔️ MOCK DTO LIST
-                val dtos = EpicMockDataSource.urls.mapIndexed { index, url ->
+                // Берем фиксированные URL картинок из моков
+                val urls = EpicMockDataSource.urls
 
-                    // Вырезаем имя файла из URL
-                    val fileName = url.substringAfterLast("/").removeSuffix(".png")
-
-                    EpicDto(
-                        identifier = index.toString(),
-                        date = "2025-05-19 00:00:00",
-                        caption = "Mock EPIC image",
-                        centroid_coordinates = null,
-                        dscovr_j2000_position = null,
-                        lunar_j2000_position = null,
-                        sun_j2000_position = null,
-                        attitude_quaternions = null,
-                        image = fileName
-                    )
+                // Объединяем реальные данные и фиксированные URL картинок
+                val dtos = apiData.mapIndexed { index, dto ->
+                    val fixedUrl = urls.getOrNull(index)
+                    if (fixedUrl != null) {
+                        dto.copy(image = fixedUrl.substringAfterLast("/"))
+                    } else dto
                 }
 
                 val entities = dtos.map { EpicMapper.dtoToEntity(it) }

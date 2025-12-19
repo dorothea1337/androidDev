@@ -38,6 +38,8 @@ class AsteroidsActivity : AppCompatActivity() {
             adapter.setData(list)
         }
 
+        viewModel.refresh()
+
         binding.btnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed() // возвращаемся на предыдущий экран
         }

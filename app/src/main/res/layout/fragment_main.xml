@@ -76,7 +76,7 @@
         android:padding="0dp"
 
         android:layout_marginTop="20dp"
-        android:text="see earth pictures ->"
+        android:text="see earth pictures"
         />
 
     <View
@@ -149,7 +149,7 @@
 
     <Button
         android:id="@+id/btnAsteroids"
-        android:text="learn more ->"
+        android:text="learn more"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/asteroid3"
@@ -160,6 +160,8 @@
         android:gravity="start|center_vertical"
         android:padding="0dp"
         android:textSize="20dp"
-        android:fontFamily="@font/ibm_plex_mono_regulat"/>
+        android:fontFamily="@font/ibm_plex_mono_regulat"
+
+        android:layout_marginTop="40dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
